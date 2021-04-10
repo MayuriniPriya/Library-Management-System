@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['middleware' => 'auth:api', 'namespace' => "Api"], function (Router $router) {
+Route::group([ 'namespace' => "Api"], function (Router $router) {
 
     /** Auth Related Routes. */
     $router->group(['prefix' => '/user', 'namespace' => "Auth"], function (Router $router) {
