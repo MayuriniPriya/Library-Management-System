@@ -1,25 +1,45 @@
 <template>
-<div>
-<ul>
-  <li class="booking-card" style="background-image: url(https://images.unsplash.com/photo-1578944032637-f09897c5233d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ)">
-    <div class="book-container">
-      <div class="content">
-        <button class="btn">Order Book</button>
-      </div>
-    </div>
-    <div class="informations-container">
-      <h2 class="title">Je suis un billet pour aller visiter un truc</h2>
-      <p class="sub-title">Et moi un je suis sous-titre</p>
-     
-    
-    </div>
-  </li>
-
-</ul>
-</div>
-
-
+  <div>
+    <ul>
+      <li
+        class="booking-card"
+        style="background-image: url(https://images.unsplash.com/photo-1578944032637-f09897c5233d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ)"
+      >
+        <div class="book-container">
+          <div class="content">
+            <button class="btn">Order Book</button>
+          </div>
+        </div>
+        <div class="informations-container">
+          <h2 class="title">{{ SingleData.title }}</h2>
+          <h2 class="title">{{ SingleData.type }}</h2>
+          <p class="sub-title">{{ SingleData.price }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
+<script>
+export default {
+  props: {
+     SingleData: [String, Number],
+   
+  },
+   SingleData: {
+      type: Array,
+      default: "455555"
+    },
+  data() {
+    return {
+      BooksData: []
+    };
+  },
+
+  methods: {},
+  created() {}
+};
+</script>
+
 <style scoped>
 * {
   margin: 0;
@@ -134,10 +154,19 @@ ul .booking-card .informations-container .more-information {
   opacity: 0;
   transition: 0.3s;
 }
-ul .booking-card .informations-container .more-information .info-and-date-container {
+ul
+  .booking-card
+  .informations-container
+  .more-information
+  .info-and-date-container {
   display: flex;
 }
-ul .booking-card .informations-container .more-information .info-and-date-container .box {
+ul
+  .booking-card
+  .informations-container
+  .more-information
+  .info-and-date-container
+  .box {
   flex: 1 0;
   padding: 15px;
   margin-top: 20px;
@@ -148,10 +177,21 @@ ul .booking-card .informations-container .more-information .info-and-date-contai
   font-weight: bold;
   font-size: 0.9em;
 }
-ul .booking-card .informations-container .more-information .info-and-date-container .box .icon {
+ul
+  .booking-card
+  .informations-container
+  .more-information
+  .info-and-date-container
+  .box
+  .icon {
   margin-bottom: 5px;
 }
-ul .booking-card .informations-container .more-information .info-and-date-container .box.info {
+ul
+  .booking-card
+  .informations-container
+  .more-information
+  .info-and-date-container
+  .box.info {
   color: #ec992c;
   margin-right: 10px;
 }
