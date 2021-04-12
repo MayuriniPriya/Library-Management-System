@@ -57,7 +57,11 @@
                     </div>
                     <!-- <div class="col col-4" >{{item.description}}</div> -->
                   </li>
+                  
                 </div>
+                
+<Pagination @NextPage="nextpage" @PreviousPage="previous" :LINKS="links" :Pagination="pagination"/>
+
               </ul>
             </div>
           </v-card>
@@ -136,15 +140,18 @@
 </template>
 <script>
 import AppBar from "../components/AppBar";
+import Pagination from "../components/pagination";
 export default {
   components: {
-    AppBar
+    AppBar,Pagination
   },
   data() {
     return {
       BooksData: [],
+      links: [],
       SearchBook: "",
       editForm: false,
+      pagination:[],
       Book: {
         title: "",
         description: "",
@@ -167,6 +174,39 @@ export default {
   },
 
   methods: {
+
+    nextpage(event){
+      
+      console.log(event);
+  const axios = require("axios");
+      axios
+        .get(event)
+        .then(response => {
+          // handle success
+          this.BooksData = response.data.data;
+          this.pagination = response.data.meta;
+          console.log(response);
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    previous(event){
+  const axios = require("axios");
+      axios
+        .get(event)
+        .then(response => {
+          // handle success
+          this.BooksData = response.data.data;
+          this.pagination = response.data.meta;
+          console.log(response);
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
     Search() {
       const axios = require("axios");
       axios
@@ -262,6 +302,8 @@ export default {
         .then(response => {
           // handle success
           this.BooksData = response.data.data;
+          this.pagination = response.data.meta;
+          this.links = response.data.link;
           console.log(response);
         })
         .catch(error => {

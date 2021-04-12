@@ -71,7 +71,7 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 * { box-sizing: border-box; }
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
 
