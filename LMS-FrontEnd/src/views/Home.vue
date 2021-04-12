@@ -1,28 +1,22 @@
 <template>
   <div class="Home">
-    <v-main>
-      <HelloWorld />
-    </v-main>
+  
+      <Login />
+
   </div>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld'
+import Login from './Login'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    Login
   }
 }
 </script>
 
 <style lang="scss">
-.Home {
-  .v-app-bar {
-    h2 {
-      text-transform: uppercase;
-    }
-  }
-}
+
 </style>

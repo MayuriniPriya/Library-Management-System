@@ -4,14 +4,15 @@
   <div class="left">
     <div class="header">
       <h2 class="animation a1">Welcome Back</h2>
-      <h4 class="animation a2">Log in to your account using email and password</h4>
+      <h4 class="animation a2">Create your account using email and password</h4>
     </div>
     <div class="form">
-      <input type="email" class="form-field animation a3" v-model="form.username" placeholder="Email Address">
-      <input type="password" class="form-field animation a4" v-model="form.password" placeholder="Password">
-      <button class="animation a6" @click="login">LOGIN</button>
+      <input  class="form-field animation a3" v-model="User.name" placeholder="Username">
+      <input type="email" class="form-field animation a4" v-model="User.email" placeholder="Email">
+      <input type="password" class="form-field animation a4" v-model="User.password" placeholder="Password">
+      <input type="password" class="form-field animation a4" v-model="User.password_confirmation" placeholder="Password confirmation">
+      <button class="animation a6" @click="register">Register</button>
       <br>
-      <a href="" @click="clicktoRegister">Register</a>
     </div>
   </div>
   <div class="right"></div>
@@ -26,15 +27,13 @@ export default {
   components: {  },
   data() {
     return {
-      form: {
-        username: "",
+       User: {
+        name: "",
+        email: "",
         password: "",
-        client_id: 2,
-        client_secret: "cHqTWgvgfcR4XauQRaD0UmtK8QgrnpzE5rnY3BrF",
-        grant_type: "password"
+        password_confirmation: ""
       },
-      isFormValid: false,
-      isRegisterForm: false,
+     
       nameRules: [v => !!v || `${this.$t("name")} ${this.$t("isRequired")}`],
       passwordRules: [
         v => !!v || `${this.$t("password")} ${this.$t("isRequired")}`,
@@ -50,12 +49,11 @@ export default {
     };
   },
   methods: {
-    login() {
+    register() {
       const axios = require("axios");
-      //http://blog.test/oauth/token
       // Make a request for a user with a given ID
       axios
-        .post(" http://localhost:8000/oauth/token",this.form)
+        .post(" http://localhost:8000/api/users",this.User)
         .then(function(response) {
           // handle success
       this.$router.push("/books-list")
@@ -67,12 +65,7 @@ export default {
           console.log(error);
         });
     },
-    clicktoRegister(){
-      this.$router.push("/register")
-    },
-    toggleForm() {
-      this.isRegisterForm = !this.isRegisterForm;
-    }
+    
   }
 };
 </script>

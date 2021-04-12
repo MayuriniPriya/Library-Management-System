@@ -49,6 +49,12 @@ const router = new Router({
       component: require('@/views/BooksStore').default,
     
     },
+    {
+      path: '/register',
+      name: 'UserList',
+      component: require('@/views/Register').default,
+    
+    },
    
   ]
 })
