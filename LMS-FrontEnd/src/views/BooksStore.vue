@@ -51,17 +51,32 @@
                     <div class="col col-2">{{ item.type }}</div>
                     <div class="col col-3">{{ item.price }}</div>
                     <div class="col col-4">
-                      <button @click="edit(item.id)" class="actionicons">Edit</button>
+                      <button @click="edit(item.id)" class="actionicons">
+                        Edit
+                      </button>
 
-                      <button @click="deleteitem(item.id)" class="actionicons1">Delete</button>
+                      <button @click="deleteitem(item.id)" class="actionicons1">
+                        Delete
+                      </button>
                     </div>
                     <!-- <div class="col col-4" >{{item.description}}</div> -->
                   </li>
-                  
                 </div>
-                
-<Pagination @NextPage="nextpage" @PreviousPage="previous" :LINKS="links" :Pagination="pagination"/>
+                <ul class="pagination">
+                  <li>
+                    <a
+                      v-if="pagination.current_page != 1"
+                      class="listview1"
+                      @click="previous"
+                      >Previous</a
+                    >
+                    <a class="listview">{{ pagination.current_page }}</a>
 
+                    <a v-if="links.next" class="listview2" @click="nextpage"
+                      >Next</a
+                    >
+                  </li>
+                </ul>
               </ul>
             </div>
           </v-card>
@@ -140,10 +155,9 @@
 </template>
 <script>
 import AppBar from "../components/AppBar";
-import Pagination from "../components/pagination";
 export default {
   components: {
-    AppBar,Pagination
+    AppBar
   },
   data() {
     return {
@@ -151,7 +165,7 @@ export default {
       links: [],
       SearchBook: "",
       editForm: false,
-      pagination:[],
+      pagination: [],
       Book: {
         title: "",
         description: "",
@@ -174,17 +188,17 @@ export default {
   },
 
   methods: {
-
-    nextpage(event){
-      
-      console.log(event);
-  const axios = require("axios");
+    nextpage() {
+      debugger;
+      const axios = require("axios");
       axios
-        .get(event)
+        .get(this.links.next)
         .then(response => {
           // handle success
           this.BooksData = response.data.data;
           this.pagination = response.data.meta;
+          this.links = response.data.links;
+
           console.log(response);
         })
         .catch(error => {
@@ -192,14 +206,16 @@ export default {
           console.log(error);
         });
     },
-    previous(event){
-  const axios = require("axios");
+    previous() {
+      const axios = require("axios");
       axios
-        .get(event)
+        .get(this.links.prev)
         .then(response => {
           // handle success
           this.BooksData = response.data.data;
           this.pagination = response.data.meta;
+          this.links = response.data.links;
+
           console.log(response);
         })
         .catch(error => {
@@ -303,7 +319,7 @@ export default {
           // handle success
           this.BooksData = response.data.data;
           this.pagination = response.data.meta;
-          this.links = response.data.link;
+          this.links = response.data.links;
           console.log(response);
         })
         .catch(error => {
@@ -317,27 +333,58 @@ export default {
   }
 };
 </script>
-<style>
-.actionicons{
-height: 30px;
-    background: blueviolet;
-    width: 75px;
-    border-radius: 16px;
-    margin-right: 17px;
-    color: white;
+<style scoped>
+.pagination {
+  width: 150px;
 }
-.actionicons1{
-height: 32px;
-    background: rgb(226, 43, 43);
-    width: 75px;
-    border-radius: 16px;
-    margin-right: 17px;
-    color: white;
+.listview {
+  background: aqua;
+  width: 40px;
+  color: white;
+  height: 20px;
+  border-radius: 50px;
+
+  padding-left: 10px;
+  top: 11px;
 }
-   
+.listview1 {
+  background: rgb(68, 231, 68);
+  width: 74px;
+  color: white;
+  height: 25px;
+  border-radius: 50px;
+
+  padding-left: 10px;
+  top: 11px;
+}
+.listview2 {
+  background: rgb(70, 11, 117);
+  width: 72px;
+  height: 25px;
+  border-radius: 50px;
+  color: white;
+
+  padding-left: 10px;
+  top: 11px;
+}
+.actionicons {
+  height: 30px;
+  background: blueviolet;
+  width: 75px;
+  border-radius: 16px;
+  margin-right: 17px;
+  color: white;
+}
+.actionicons1 {
+  height: 32px;
+  background: rgb(226, 43, 43);
+  width: 75px;
+  border-radius: 16px;
+  margin-right: 17px;
+  color: white;
+}
 </style>
 <style lang="scss">
- 
 .container {
   max-width: 1000px;
   margin-left: auto;

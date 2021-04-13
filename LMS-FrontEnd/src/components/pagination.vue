@@ -4,8 +4,8 @@
       <a  class="listview">{{ Pagination.current_page }}</a>
 
     <li>
-      <a href="#" v-if="Pagination.current_page !=1" class="listview1" @click="Previous">Previous</a>
-      <a href="#" class="listview2" @click="nextpage">Next</a>
+      <a  v-if="Pagination.current_page !=1" class="listview1" @click="Previous">Previous</a>
+      <a  class="listview2" @click="nextpage">Next</a>
     </li>
   </ul>
 </template>
@@ -31,7 +31,9 @@ export default {
   },
   methods: {},
   nextpage() {
-    this.$emit("NextPage", this.LINKS.next);
+    debugger
+    // this.$emit('update-cart', item)
+    this.$emit('NextPage', this.LINKS.next);
   },
   Previous() {
     this.$emit("PreviousPage", this.LINKS.prev);
