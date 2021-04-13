@@ -8,7 +8,7 @@
         <SingleBook :SingleData="item" />
       </div>
     </div>
-    <div style="text-align: center;">
+    <!-- <div style="text-align: center;">
      <ul>
        <li>
 
@@ -28,8 +28,36 @@
       
         
       
-    </div>
+    </div> -->
     <!-- </div> -->
+
+    <div class="demo">
+      <nav class="pagination-outer" aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item">
+            <a
+              href="#"
+              class="page-link"
+              aria-label="Previous"
+              v-if="pagination.current_page != 1"
+              @click="previous"
+            >
+              <span aria-hidden="true">«</span>
+            </a>
+          </li>
+
+          <li class="page-item active">
+            <a class="page-link" href="#">{{ pagination.current_page }}</a>
+          </li>
+
+          <li class="page-item">
+            <a href="#" class="page-link" aria-label="Next"  v-if="links.next" @click="nextpage">
+              <span aria-hidden="true">»</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 <script>
@@ -106,38 +134,56 @@ export default {
 };
 </script>
 <style>
+ul,
+li {
+  list-style-type: none;
+}
+.pagination-outer {
+  text-align: center;
+}
 .pagination {
-  width: 400px;
-  height: 100px;
+  font-family: "Itim", cursive;
+  border-radius: 10px 10px 0 0;
+  border-top: 10px solid #ff9f1a;
+  display: inline-flex;
 }
-.listview {
-  background: aqua;
-  width: 90px !important;
-  color: white;
-  height: 20px !important;
-  border-radius: 50px;
-
-  padding-left: 10px;
-  top: 11px;
+.pagination li {
+  padding: 5px 0;
+  margin: 0 5px;
 }
-.listview1 {
-  background: rgb(68, 231, 68);
- width: 90px  !important;
-  height: 35px !important;
-  border-radius: 50px;
-
-  padding-left: 10px;
-  top: 11px;
+.pagination li a.page-link {
+  color: #fff;
+  background: transparent;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 30px;
+  height: 33px;
+  width: 43px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ff9f1a;
+  border-radius: 0;
+  display: block;
+  transition: all 0.3s ease 0s;
 }
-.listview2 {
-  background: rgb(70, 11, 117);
-  width: 90px  !important;
-  height: 35px !important;
-  border-radius: 50px;
-  color: white;
-
-  padding-left: 10px;
-  top: 11px;
+.pagination li.active a.page-link,
+.pagination li a.page-link:hover,
+.pagination li.active a.page-link:hover,
+.pagination li a.page-link:focus {
+  color: #fff;
+  background: #ff9f1a;
+  line-height: 38px;
+  height: 41px;
+  margin: -5px 0 -3px;
+  border: 1px solid #ff9f1a;
 }
-
+@media only screen and (max-width: 480px) {
+  .pagination {
+    font-size: 0;
+    display: block;
+  }
+  .pagination li {
+    display: inline-block;
+  }
+}
 </style>
